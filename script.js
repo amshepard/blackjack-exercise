@@ -13,6 +13,38 @@ htmlFunctions.js also sets up the button element so that when you
 click it, the "drawCard" function runs.
 */
 
+let total = 0
+
 function drawCard() {
-    console.log("Drawing card.")
+    let card = pickRandomCard(deckOfCards)
+    total += getValueofCard(card)
+    blackjackHtmlMethods.addCardToCardContainer(card)
+    blackjackHtmlMethods.addMessageToMessageContainer(total)
+
 }
+
+const faceCardValues = {
+    Ace: 1,
+    Jack: 10,
+    Queen: 10,
+    King: 10,
+}
+
+function getValueofCard(card) {
+    const result = Number.parseInt(card)
+    // if (Number.isNaN(result)) {
+    //     return faceCardValues[card.split(" ")[0]]
+    // } else {
+    //     return result
+    // }
+    return Number.isNaN(result) ? faceCardValues[card.split(" ")[0]] : result
+}
+
+function pickRandomCard(deck) {
+    let randomNumber = Math.floor(Math.random() * deck.length)
+    return deck.splice(randomNumber, 1)[0]
+}
+
+// let randomCard = pickRandomCard(deckOfCards)
+// console.log(randomCard)
+// console.log(getValueofCard(randomCard))
